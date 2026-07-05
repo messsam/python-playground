@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PyShop Products</title>
+</head>
+<body>
+{% extends 'base.html' %} <!-- Extending the template defined in base.html -->
+
+{% block content %} <!-- All the below markup will go to the content block -->
+    <h1>Products</h1>
+    <div class="row">
+        {% for product in products %} <!-- Django template tag; contains dynamic code -->
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ product.image_url }}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">${{ product.price }}</p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Basically Django's render method evaluates the expressions dynamically written in block tags
+                and replaces these tags with renderable HTML code -->
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+</body>
+</html>
+
+<!-- when Django's render method tries to render index.html, first it will look at the markup defined in base.html,
+and it's going to fill the content block with the markup we defined in index.html -->
